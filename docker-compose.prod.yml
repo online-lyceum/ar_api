@@ -1,7 +1,7 @@
 version: '3'
 services:
   api:
-    image: "ar_api:${JOB_NAME}"
+    build: ./
     restart: always
     depends_on:
       - "postgres"
@@ -22,3 +22,4 @@ services:
 networks:
   front_net:
     external: true
+
