@@ -13,9 +13,17 @@ logger = logging.getLogger(__name__)
 
 class UserService(BaseService):
     async def get_list(self, name_filter, job_title_filter):
-        return schemas.users.UsersList(
-            users=await self._get_list()
-        )
+        if name_filter is None:
+            name_filter = ''
+        if job_title_filter is None:
+            job_title_filter = ''
+        users = await self._get_list()
+        ret = []
+        for user in users:
+            if name_filter in user.name and job_title_filter in user.job_title:
+                ret.append(user)
+        return schemas.users.UsersList(users=ret)
+
 
     async def _get_list(self) -> list[tables.User]:
         query = select(tables.User)
