@@ -1,11 +1,8 @@
 import asyncio
-import logging
+from loguru import logger
 
 import asyncpg
 from pydantic import BaseSettings
-
-
-logger = logging.getLogger(__name__)
 
 
 class Settings(BaseSettings):
@@ -19,22 +16,28 @@ settings = Settings()
 
 
 async def connect_create_if_not_exists(user, database, password, host):
-    try:
-        conn = await asyncpg.connect(user=user, database=database,
-                                     password=password, host=host)
-        await conn.close()
-    except asyncpg.InvalidCatalogNameError:
-        # Database does not exist, create it.
-        sys_conn = await asyncpg.connect(
-            database='template1',
-            user='postgres',
-            password=password,
-            host=host
-        )
-        await sys_conn.execute(
-            f'CREATE DATABASE "{database}" OWNER "{user}"'
-        )
-        await sys_conn.close()
+    for i in range(5):
+        try:
+            conn = await asyncpg.connect(user=user, database=database,
+                                         password=password, host=host)
+            await conn.close()
+            break
+        except asyncpg.InvalidCatalogNameError:
+            # Database does not exist, create it.
+            sys_conn = await asyncpg.connect(
+                database='template1',
+                user='postgres',
+                password=password,
+                host=host
+            )
+            await sys_conn.execute(
+                f'CREATE DATABASE "{database}" OWNER "{user}"'
+            )
+            await sys_conn.close()
+            break
+        except Exception:
+            print("Retry in 5 seconds...")
+            await asyncio.sleep(5)
 
 
 def run_init_db():

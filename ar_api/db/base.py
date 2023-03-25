@@ -1,5 +1,6 @@
 import asyncio
-import logging
+
+from loguru import logger
 
 from sqlalchemy import MetaData
 from sqlalchemy.orm import sessionmaker
@@ -8,9 +9,6 @@ from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.ext.declarative import declarative_base
 
 from .create import settings
-
-
-logger = logging.getLogger(__name__)
 
 
 DATABASE_URL = f'postgresql+asyncpg://' \
@@ -52,12 +50,7 @@ async def init_models():
 
 def run_init_models():
     asyncio.run(init_models())
-    print("Done")
 
 
-async def get_session() -> AsyncSession:
-    session: AsyncSession = async_session()
-    try:
-        yield session
-    finally:
-        await session.close()
+def get_session() -> AsyncSession:
+    return async_session()
