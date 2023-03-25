@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 class UserService(BaseService):
-    async def get_list(self, user_filter):
+    async def get_list(self, name_filter, job_title_filter):
         return schemas.users.UsersList(
             users=await self._get_list()
         )

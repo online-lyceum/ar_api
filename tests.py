@@ -4,11 +4,11 @@ user = {"name": "John A.", "coordinates": "0.11112 5.333", "job_title": "Middle 
 user2 = {"name": "John A.", "coordinates": "0.5332 7.833", "job_title": "Middle frontend"}
 user_after = {"name": "John A.", "coordinates": "0.33312 5.333", "job_title": "Middle backend"}
 api_url = "http://127.0.0.1:8080/api/user"
-user_filter = {"name": '', "job_title": ''}
+user_filter = {"name_filter": '', "job_title_filter": ''}
 
 
 def create_user(user_data):
-    res = requests.put(api_url, data=json.dumps(user))
+    res = requests.put(api_url, data=json.dumps(user_data))
     return res
 
 
