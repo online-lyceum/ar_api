@@ -13,7 +13,6 @@ def get_path(
 
     path = []
     while start_coord != stop_coord:
-        print(start_coord, stop_coord)
         if start_coord[0] < stop_coord[0]:
             start_coord[0] += 1
         if start_coord[0] > stop_coord[0]:
