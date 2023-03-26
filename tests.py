@@ -30,7 +30,7 @@ def get_users(user_filter_data):
 
 
 def get_path(coords_data):
-    res = requests.get("http://127.0.0.1:8080/api/path", params=coords_data)
+    res = requests.get("https://ufo.lyceumland.ru/api/path", params=coords_data)
     print(res)
     return json.loads(res.text)
 

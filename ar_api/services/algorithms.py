@@ -1,5 +1,5 @@
 from math import sqrt
-#from ar_api import schemas
+from ar_api import schemas
 
 
 def get_path(
@@ -23,8 +23,8 @@ def get_path(
         if start_coord[1] > stop_coord[1]:
             start_coord[1] -= 1
 
-        path.append(tuple(start_coord))
-        #path.append(schemas.path.Coords(x=start_coord[0], y=start_coord[1]))
+        #path.append(tuple(start_coord))
+        path.append(schemas.path.Coords(x=start_coord[0], y=start_coord[1]))
 
     return path
 
