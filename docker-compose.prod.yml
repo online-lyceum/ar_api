@@ -4,18 +4,18 @@ services:
     build: ./
     restart: always
     depends_on:
-      - "postgres"
+      - "redis"
     env_file:
       - .variables.env
+    ports:
+      - "8080:80"
     networks:
       front_net:
       default:
 
-  postgres:
-    image: postgres
-    restart: always
-    env_file:
-      - .variables.env
+  redis:
+    image: redis
+    command: redis-server --appendonly yes --replica-read-only no
     networks:
       default:
 

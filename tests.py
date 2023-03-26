@@ -14,8 +14,8 @@ for u in users:
     u['coordinates'] = '1.0 1.0'
 print(users)
 user_after = {"name": "John A.", "coordinates": "0.33312", "job_title": "Middle backend"}
-#api_url = "https://ufo.lyceumland.ru/api/user"
-api_url = "http://127.0.0.1:8080/api/user"
+api_url = "https://ufo.lyceumland.ru/api/user"
+#api_url = "http://127.0.0.1:8080/api/user"
 user_filter = {"name_filter": 'Abragham', "job_title_filter": ''}
 
 
