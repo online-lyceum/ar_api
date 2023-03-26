@@ -20,7 +20,7 @@ class User(BaseUser):
 
 
 class UsersList(BaseModel):
-    users: list[User]
+    users: list[UserCreate]
 
 
 class UserFilter(BaseModel):

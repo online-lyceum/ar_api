@@ -16,7 +16,7 @@ print(users)
 user_after = {"name": "John A.", "coordinates": "0.33312", "job_title": "Middle backend"}
 #api_url = "https://ufo.lyceumland.ru/api/user"
 api_url = "http://127.0.0.1:8080/api/user"
-user_filter = {"name_filter": 'John', "job_title_filter": ''}
+user_filter = {"name_filter": 'Abragham', "job_title_filter": ''}
 
 
 def create_user(user_data):
@@ -31,12 +31,12 @@ def get_users(user_filter_data):
 
 for user in users:
     create_user(user)
-print(*[u['name'] for u in get_users(user_filter)['users']], sep='\t')
+#print(*[u['name'] for u in get_users(user_filter)['users']], sep='\t')
 print(*get_users({})['users'])
-#for _ in range(5):
-#    users = get_users(user_filter)['users']
-#    print(users)
-#    user = users[0]
-#    user['coordinates'] = str(float(user['coordinates']) + 2.02)
-#    create_user(user)
-#    print(get_users(user_filter))
+for _ in range(5):
+    users = get_users(user_filter)['users']
+    print(users)
+    user = users[0]
+    user['coordinates'] = ' '.join(map(lambda i: str(float(i) + 2.02), user['coordinates'].split()))
+    create_user(user)
+    print(get_users(user_filter))
