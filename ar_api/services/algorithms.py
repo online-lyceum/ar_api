@@ -12,17 +12,18 @@ def get_path(
     diff_x, diff_y = 1, 1
 
     path = []
-    while diff_x != 0 and diff_y != 0:
+    while start_coord != stop_coord:
         diff_x = start_coord[0] - stop_coord[0]
         diff_y = start_coord[1] - stop_coord[1]
 
-        if diff_x < 0:
+
+        if start_coord[0] < stop_coord[0]:
             start_coord[0] += 1
-        if diff_x > 0:
+        if start_coord[0] > stop_coord[0]:
             start_coord[0] -= 1
-        if diff_y < 0:
+        if start_coord[1] < stop_coord[1]:
             start_coord[1] += 1
-        if diff_x > 0:
+        if start_coord[1] > stop_coord[1]:
             start_coord[1] -= 1
 
         path.append(schemas.path.Coords(x=start_coord[0], y=start_coord[1]))
