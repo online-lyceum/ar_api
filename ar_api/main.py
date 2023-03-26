@@ -21,6 +21,7 @@ def create_application():
                           logger=logger,
                           **application_metadata)
     application.include_router(api.user.router)
+    application.include_router(api.path.router)
     return application
 
 

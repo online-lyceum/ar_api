@@ -29,14 +29,23 @@ def get_users(user_filter_data):
     return json.loads(res.text)
 
 
-for user in users:
-    create_user(user)
+def get_path(coords_data):
+    res = requests.get("http://127.0.0.1:8080/api/path", params=coords_data)
+    print(res)
+    return json.loads(res.text)
+
+
+#for user in users:
+#    create_user(user)
 #print(*[u['name'] for u in get_users(user_filter)['users']], sep='\t')
-print(*get_users({})['users'])
-for _ in range(5):
-    users = get_users(user_filter)['users']
-    print(users)
-    user = users[0]
-    user['coordinates'] = ' '.join(map(lambda i: str(float(i) + 2.02), user['coordinates'].split()))
-    create_user(user)
-    print(get_users(user_filter))
+#print(*get_users({})['users'])
+#for _ in range(5):
+#    users = get_users(user_filter)['users']
+#    print(users)
+#    user = users[0]
+#    user['coordinates'] = ' '.join(map(lambda i: str(float(i) + 2.02), user['coordinates'].split()))
+#    create_user(user)
+#    print(get_users(user_filter))
+
+coords_data = {'start_x': 0.5, 'start_y': 0.21, 'end_x': 4.0, 'end_y': 5.3}
+print(get_path(coords_data))
